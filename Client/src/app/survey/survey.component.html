@@ -1,0 +1,118 @@
+<mat-horizontal-stepper labelPosition="bottom" #stepper>
+    <mat-step [stepControl]="firstTypeQuestion">
+        <mat-card>
+            <form #riskQuestionsForm="ngForm" (ngSubmit)="riskQuestionsForm.valid">
+                <ng-template matStepLabel>Risk Analysis</ng-template>
+                <!-- <mat-progress-bar mode="determinate" value="40"></mat-progress-bar> -->
+
+                <div class="row" id="riskQuestions" *ngFor="let question of questions; let q = index">
+                    <div class="col s8 offset-s2" *ngIf="question.questionCategory === 'riskAnalysis'">
+                        <mat-card-content>
+                            <label id="questionLabel"> {{q+ 1}}. {{question.question}}</label>
+                            <label class="hidden">{{question._id}}</label>
+                            <mat-card-actions>
+                                <mat-list class="answer">
+                                    <ng-container *ngFor="let option of question.options; let i = index; ">
+                                        <mat-list-item (click)="onClick(question._id, i)">
+                                            {{option.optionName}}
+                                        </mat-list-item>
+                                    </ng-container>
+                                </mat-list>
+                            </mat-card-actions>
+
+                        </mat-card-content>
+                    </div>
+                </div>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-card>
+    </mat-step>
+    <mat-step [stepControl]="secondTypeQuestion">
+        <form #securityQuestionsForm="ngForm">
+            <ng-template matStepLabel>Security Analysis</ng-template>
+            <div class="row" id="securityQuestions" *ngFor="let question of questions">
+                <div class="col s8 offset-s2" *ngIf="question.questionCategory === 'securityAnalysis'">
+                    <mat-card-content>
+                        <label id="questionLabel"> {{question.question}}</label>
+                        <label class="hidden">{{question._id}}</label>
+                        <mat-card-actions>
+                            <mat-list class="answer">
+                                <ng-container *ngFor="let option of question.options; let i = index">
+                                    <mat-list-item (click)="onClick(question._id, i)">
+                                        {{option.optionName}}
+                                    </mat-list-item>
+                                </ng-container>
+                            </mat-list>
+                        </mat-card-actions>
+
+                    </mat-card-content>
+                </div>
+            </div>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Submit</button>
+                <!-- <button mat-button (click)="stepper.reset()">Reset</button>
+                <button mat-button-raised type="submit">submit</button> -->
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        Thank you. Your survey is done.
+
+        Here are you results
+        <div>
+            <table>
+                <tr>
+                    <!-- <th>ID</th> -->
+                    <th>Questions</th>
+                    <th>Your Answers</th>
+                </tr>
+                <tr *ngFor="let answer of answersFromAPI">
+                    <!-- <td>{{answer._id}}</td> -->
+                    <td>
+                        <div *ngFor="let question of questions">
+                            <!-- {{question.questionCategory}} -->
+                            <div *ngIf="question._id === answer.question_Id">
+                                {{question.question}}
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngFor="let question of questions">
+                            <div *ngIf="question._id === answer.question_Id">
+                                <div *ngFor="let option of question.options">
+                                    <div *ngIf="option.optionValue === answer.answerforQ_IdU_Id">
+                                        {{option.optionName}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div *ngFor ="let answer of answersFromAPI"> -->
+                        <!-- <div *ngFor="let question of questions"> -->
+                        <!-- <div *ngFor="let option of options">
+                                {{option}}
+                                <div *ngIf="question._id === answer.question_Id">
+                                    <div *ngIf="option.optionValue === answer.answerforQ_IdU_Id">
+                                        {{option.optionValue}}
+                                        {{question.options.optionName}}
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div> -->
+
+                        <!-- </div> -->
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

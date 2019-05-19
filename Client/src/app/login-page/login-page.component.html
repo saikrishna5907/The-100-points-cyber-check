@@ -1,0 +1,50 @@
+<mat-card>
+    <div>
+        <h4>Log In</h4>
+    </div>
+    <div class="logo">
+        <img src="../../assets/img/login_img.png" alt="IMG">
+    </div>
+    <form #loginForm="ngForm" (ngSubmit)="loginForm.valid && onSubmit(loginForm)">
+        <mat-form-field appearance="outline">
+            <mat-label>Email ID</mat-label>
+            <input matInput placeholder="Email ID" #email="ngModel" [(ngModel)]="model.email" name="email" required
+                [pattern]='emailRegex'>
+            <mat-error *ngIf="email.errors && email.errors.required">Email field cannot be empty.</mat-error>
+            <mat-error *ngIf="email.errors && email.errors.pattern">Invalid Email.</mat-error>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Enter your password" #password="ngModel" [(ngModel)]="model.password"
+                name="password" [type]="hide ? 'password' : 'text'" minlength="4">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Select Login Type</mat-label>
+            <mat-select placeholder="Select Login Type" #loginType ngModel required name="loginType">
+                <mat-option value="user">User</mat-option>
+                <mat-option value="admin">Admin</mat-option>
+            </mat-select>
+            <mat-error *ngIf="loginType.value == ''">
+                <option>Please Select Designation</option>
+            </mat-error>
+        </mat-form-field>
+
+        <button [disabled]="loginForm.form.invalid"
+            Style="width:100%;background-color: rgb(241, 103, 60);color:cornsilk;border-radius:15px" mat-raised-button
+            type="submit">Log In</button>
+    </form>
+    <div>
+        <a [routerLink]="['signUp']">Does not have an account? Sign Up here</a>
+    </div>
+    <div class="alert" *ngIf="serverErrorMessages">
+        {{serverErrorMessages}}
+    </div>
+
+</mat-card>

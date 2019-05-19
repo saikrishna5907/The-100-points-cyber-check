@@ -1,0 +1,10 @@
+mat-card{
+    width: 70%;
+    align-content: center;
+    margin: 20% auto;
+    margin-top: 10%;
+    background-color: rgba(169, 213, 224, 0.5);
+}
+mat-form-field{
+    width: 100%;
+}

@@ -1,0 +1,56 @@
+<mat-card>
+  <form #signUpForm="ngForm" (ngSubmit)= "signUpForm.valid && onSubmit(signUpForm)">
+    <mat-card-title>Sign Up Here</mat-card-title>
+    <br/>
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="First Name" #firstName="ngModel" [(ngModel)]="userService.selectedUser.firstName"
+        name="firstName" required>
+      <mat-error *ngIf="firstName.value == ''">First Name cannot be empty</mat-error>
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Last Name" #lastName="ngModel" [(ngModel)]="userService.selectedUser.lastName"
+        name="lastName" required>
+      <mat-error *ngIf="lastName.value == ''">Last Name cannot be empty</mat-error>
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email ID</mat-label>
+      <input matInput placeholder="Email ID" #email="ngModel" [(ngModel)]="userService.selectedUser.email" name="email" required [pattern]='emailRegex'>
+      <mat-error *ngIf="email.errors && email.errors.required">Email field cannot be empty.</mat-error>
+      <mat-error *ngIf="email.errors && email.errors.pattern">Invalid Email.</mat-error>
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Company Name</mat-label>
+      <input matInput placeholder="Company Name" #companyName="ngModel" [(ngModel)]="userService.selectedUser.companyName"
+        name="companyName" required>
+      <mat-error *ngIf="companyName.value == ''">Last Name cannot be empty</mat-error>
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Enter your password" #password="ngModel" [(ngModel)]="userService.selectedUser.password" name="password" [type]="hide ? 'password' : 'text'" minlength="4">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button [disabled]="signUpForm.form.invalid"
+      Style="width: 100%;background-color: rgb(241, 103, 60);color:cornsilk;border-radius:15px" mat-raised-button type="submit">Sign Up</button>
+  </form>
+  <!-- success Message -->
+<div class="success" style="width: 100%;background-color: rgb(157, 196, 112);color:cornsilk;border-radius:15px" *ngIf= "showSuccessMessage">
+  Saved Successfully.
+</div>
+<!-- Error messages -->
+<div class="alert" *ngIf= "serverErrorMessages">
+  {{serverErrorMessages}}
+</div>
+</mat-card>

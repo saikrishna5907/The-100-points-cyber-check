@@ -1,0 +1,12 @@
+mat-card{
+    width: 50%;
+    align-content: center;
+    margin: 20% auto;
+    margin-top: 10%;
+}
+mat-form-field{
+    width: 100%;
+}
+.logo,h4{
+    text-align: center;
+}
