@@ -1,10 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.list-item-active {
+  font-weight: bold;
+  background-color: orange; 
+}
 html,body{
     height: 100%;
 }
 body{
+    height: 100%;
     margin: 0;
+    font-family: 'Trebuchet MS', Arial, sans-serif
 }
 input.ng-invalid.ng-dirty{
     border-bottom-color : #e91e63 !important;
@@ -16,10 +23,13 @@ button.btn-submit{
 }
 
 mat-list.answer mat-list-item:hover{
-    background-color: #26a69a;
-    color: #eafaf9;
+    background-color: #ff5100;
+    color: #00f0e0;
     cursor: pointer;
     width:100%;
+}
+mat-list.answer mat-list-item:visited{
+    background-color: #44a626;
 }
 mat-list-item{
     color: #eafaf9 !important;

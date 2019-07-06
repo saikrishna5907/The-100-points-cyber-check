@@ -1,3 +1,6 @@
+<app-mainpageheader></app-mainpageheader>
+<div class="signUpPage">
+  <br/><br/>
 <mat-card>
   <form #signUpForm="ngForm" (ngSubmit)= "signUpForm.valid && onSubmit(signUpForm)">
     <mat-card-title>Sign Up Here</mat-card-title>
@@ -43,7 +46,9 @@
       </button>
     </mat-form-field>
     <button [disabled]="signUpForm.form.invalid"
-      Style="width: 100%;background-color: rgb(241, 103, 60);color:cornsilk;border-radius:15px" mat-raised-button type="submit">Sign Up</button>
+      Style="width: 100%;background-color: rgb(241, 103, 60);color:cornsilk" mat-raised-button type="submit">Sign Up</button>
+      <br/><br/>
+      <button Style="width: 100%;background-color: rgb(241, 103, 60);color:cornsilk" routerLink ="/loginPage"mat-raised-button type="submit">Log In ?</button>
   </form>
   <!-- success Message -->
 <div class="success" style="width: 100%;background-color: rgb(157, 196, 112);color:cornsilk;border-radius:15px" *ngIf= "showSuccessMessage">
@@ -54,3 +59,4 @@
   {{serverErrorMessages}}
 </div>
 </mat-card>
+</div>

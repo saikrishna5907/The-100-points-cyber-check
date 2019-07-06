@@ -1,23 +1,32 @@
+<app-user-side-nav>
 <mat-horizontal-stepper labelPosition="bottom" #stepper>
-    <mat-step [stepControl]="firstTypeQuestion">
+    <mat-step [stepControl]="operationalControls_TypeQuestion">
         <mat-card>
-            <form #riskQuestionsForm="ngForm" (ngSubmit)="riskQuestionsForm.valid">
-                <ng-template matStepLabel>Risk Analysis</ng-template>
+            <form #riskQuestionsForm="ngForm">
+                <ng-template matStepLabel><label>OPERATIONAL CONTROLS</label></ng-template>
                 <!-- <mat-progress-bar mode="determinate" value="40"></mat-progress-bar> -->
 
                 <div class="row" id="riskQuestions" *ngFor="let question of questions; let q = index">
-                    <div class="col s8 offset-s2" *ngIf="question.questionCategory === 'riskAnalysis'">
+                    <div class="col s8 offset-s2" *ngIf="question.questionCategory === 'OPERATIONAL CONTROLS'">
                         <mat-card-content>
                             <label id="questionLabel"> {{q+ 1}}. {{question.question}}</label>
                             <label class="hidden">{{question._id}}</label>
-                            <mat-card-actions>
-                                <mat-list class="answer">
-                                    <ng-container *ngFor="let option of question.options; let i = index; ">
-                                        <mat-list-item (click)="onClick(question._id, i)">
+                            <mat-card-actions >
+                                <mat-list class="answer" >
+                                    <ng-container *ngFor="let option of question.options; let i = index; " >
+                                        <mat-list-item class="answerOption" routerLinkActive  #routerLinkActiveInstance="routerLinkActive"
+                                        [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+                                        [class.list-item-active]="routerLinkActiveInstance.isActive" (click)="saveToLocalOC(question._id, i)" >
                                             {{option.optionName}}
+                                           
                                         </mat-list-item>
+                                        
                                     </ng-container>
+                                    
                                 </mat-list>
+                                <div class="choiceMade">
+                                    Your Answer:
+                                    </div>
                             </mat-card-actions>
 
                         </mat-card-content>
@@ -25,39 +34,100 @@
                 </div>
                 <div>
                     <button mat-button matStepperNext>Next</button>
+                    <button mat-button (click)="saveToDbOC()" [routerLink]="['/dashboard']">Save And Exit</button>
                 </div>
             </form>
         </mat-card>
     </mat-step>
-    <mat-step [stepControl]="secondTypeQuestion">
+    <mat-step [stepControl]="technicalControls_system_TypeQuestion">
         <form #securityQuestionsForm="ngForm">
-            <ng-template matStepLabel>Security Analysis</ng-template>
-            <div class="row" id="securityQuestions" *ngFor="let question of questions">
-                <div class="col s8 offset-s2" *ngIf="question.questionCategory === 'securityAnalysis'">
+            <ng-template matStepLabel><label>TECHNICAL CONTROLS - SYSTEMS</label></ng-template>
+            <div class="row" id="securityQuestions" *ngFor="let question of questions; let q = index ">
+                <div class="col s8 offset-s2" *ngIf="question.questionCategory === 'TECHNICAL CONTROLS - SYSTEMS'">
                     <mat-card-content>
-                        <label id="questionLabel"> {{question.question}}</label>
+                        <label id="questionLabel">{{q+ 1}}. {{question.question}}</label>
                         <label class="hidden">{{question._id}}</label>
                         <mat-card-actions>
                             <mat-list class="answer">
                                 <ng-container *ngFor="let option of question.options; let i = index">
-                                    <mat-list-item (click)="onClick(question._id, i)">
+                                    <mat-list-item (click)="saveToLocalTCS(question._id, i)">
                                         {{option.optionName}}
                                     </mat-list-item>
                                 </ng-container>
                             </mat-list>
                         </mat-card-actions>
-
                     </mat-card-content>
                 </div>
             </div>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Submit</button>
+                <button mat-button matStepperNext>Next</button>
+                <button mat-button (click)="saveToDbTCS()" [routerLink]="['/dashboard']">Save And Exit</button>
                 <!-- <button mat-button (click)="stepper.reset()">Reset</button>
                 <button mat-button-raised type="submit">submit</button> -->
             </div>
         </form>
     </mat-step>
+    <mat-step [stepControl]="technicalControls_NASC_TypeQuestion">
+            <form #securityQuestionsForm="ngForm">
+                <ng-template matStepLabel><label>TECHNICAL CONTROLS– NETWORKS,  </label><br/>
+                    <label>APPLICATIONS, SERVICES and THE CLOUD</label></ng-template>
+                <div class="row" id="securityQuestions" *ngFor="let question of questions; let q = index ">
+                    <div class="col s8 offset-s2" *ngIf="question.questionCategory === 'TECHNICAL CONTROLS – NETWORKS, APPLICATIONS, SERVICES and THE CLOUD'">
+                        <mat-card-content>
+                            <label id="questionLabel">{{q+ 1}}. {{question.question}}</label>
+                            <label class="hidden">{{question._id}}</label>
+                            <mat-card-actions>
+                                <mat-list class="answer">
+                                    <ng-container *ngFor="let option of question.options; let i = index">
+                                        <mat-list-item (click)="saveToLocalTCNASC(question._id, i)">
+                                            {{option.optionName}}
+                                        </mat-list-item>
+                                    </ng-container>
+                                </mat-list>
+                            </mat-card-actions>
+                        </mat-card-content>
+                    </div>
+                </div>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                    <button mat-button (click)="saveToDbTCNASC()"  [routerLink]="['/dashboard']">Save And Exit</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="legalAndRegulatoryControls_TypeQuestion">
+                <form #securityQuestionsForm="ngForm" (ngSubmit)="saveToDbLRC()">
+                    <ng-template matStepLabel><label>LEGAL AND REGULATORY CONTROLS</label><br/>
+                    </ng-template>
+                    <div class="row" id="securityQuestions" *ngFor="let question of questions; let q = index ">
+                        <div class="col s8 offset-s2" *ngIf="question.questionCategory === 'LEGAL AND REGULATORY CONTROLS'">
+                            <mat-card-content>
+                                <label id="questionLabel">{{q+ 1}}. {{question.question}}</label>
+                                <label class="hidden">{{question._id}}</label>
+                                <mat-card-actions>
+                                    <mat-list class="answer">
+                                        <ng-container *ngFor="let option of question.options; let i = index">
+                                            <mat-list-item (click)="saveToLocalLRC(question._id, i)">
+                                                {{option.optionName}}
+                                               
+                                            </mat-list-item>
+                                            
+                                        </ng-container>
+                                    </mat-list>
+                                </mat-card-actions>
+                                
+                            </mat-card-content>
+                        </div>
+                    </div>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <!-- <button mat-button matStepperNext>Submit</button> -->
+                        <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+                        <button mat-button type="submit" [routerLink]="['/dashboard']">submit</button>
+                    </div>
+                </form>
+            </mat-step>
     <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         Thank you. Your survey is done.
@@ -116,3 +186,4 @@
         </div>
     </mat-step>
 </mat-horizontal-stepper>
+</app-user-side-nav>

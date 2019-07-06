@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import {environment} from '../../environments/environment';
 import {Question} from './question.model';
@@ -6,8 +6,7 @@ import {UserService} from '../shared/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class QuestionService {
-  qns: any[];
+export class QuestionService{
   qnProgress: number;
   questionName: Question;
   currentQueston : Question = {
@@ -20,13 +19,15 @@ export class QuestionService {
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
-
+  
   getQuestionWithQID(id: String){
     return this.http.get(environment.apiBaseUrl + '/questions/'+id)
   }
-  
+  getQuestionCategory(question: Question){
+    return question.questionCategory
+  }
   getUserInfo(){
-    return this.userService.getUserPayload()._id;
+    return this.userService.getUserPayload()._id; 
   }
 
   //http crud methods
@@ -39,4 +40,5 @@ export class QuestionService {
   updateQuestion (question: Question) {
     return this.http.put(environment.apiBaseUrl + '/questions',question);
   }
+
 }

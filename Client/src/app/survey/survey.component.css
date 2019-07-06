@@ -1,16 +1,28 @@
-.choicesForQues{
+/* .choicesForQues{
     display: flex;
     flex-direction: column;
     margin: 15px 0;
-}
-.choiceRadioBtn{
+} */
+/* .choiceRadioBtn{
     margin: 5px;
 }
+.i{
+  background-color: red !important;
+} */
 mat-card-content{
-    background-color: rgb(65, 70, 77);
+    background-color: rgb(11, 20, 32);
     color: #eafaf9 !important;
 }
-
+/* .hide{
+  background-color: rgb(65, 70, 77);
+  color: #eafaf9 !important;
+} */
+/* .answerChoice mat-list-item:visited{
+  background-color: blue;
+} */
+/* .show{
+  background-color: blue;
+} */
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;

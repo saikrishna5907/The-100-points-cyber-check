@@ -1,8 +1,28 @@
 mat-card{
-    width: 50%;
+    width: 30%;
     align-content: center;
-    margin: 20% auto;
-    margin-top: 10%;
+    margin: auto;
+    background-color: rgba(169, 213, 224, 0.5);
+    color:black;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    /* background-color:rgb(255, 255, 255); */
+    color: white;
+   }
+   ::ng-deep .mat-form-field-underline {
+    /*change color of underline*/
+    background-color: green !important;
+  } 
+  ::ng-deep .mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: green !important;;
+}
+.loginPage{
+    background:  url('../../assets/img/login.gif') no-repeat center center fixed; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-content: center;
 }
 mat-form-field{
     width: 100%;

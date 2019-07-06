@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {UserService} from '../shared/user.service'
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-user-side-nav',
@@ -15,6 +17,10 @@ export class UserSideNavComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver,private userService: UserService, private router: Router) {}
 
+  signOut(){
+    this.userService.deleteToken();
+    this.router.navigateByUrl('#');
+  }
 }

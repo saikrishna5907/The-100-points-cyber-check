@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserPageComponent } from './user-page.component';
+import { MainpageheaderComponent } from './mainpageheader.component';
 
-describe('UserPageComponent', () => {
-  let component: UserPageComponent;
-  let fixture: ComponentFixture<UserPageComponent>;
+describe('MainpageheaderComponent', () => {
+  let component: MainpageheaderComponent;
+  let fixture: ComponentFixture<MainpageheaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserPageComponent ]
+      declarations: [ MainpageheaderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserPageComponent);
+    fixture = TestBed.createComponent(MainpageheaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

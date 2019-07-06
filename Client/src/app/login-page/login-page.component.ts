@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 
+
 import {UserService} from '../shared/user.service'
 @Component({
   selector: 'app-login-page',
@@ -22,7 +23,7 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {
     if(this.userService.isLoggedIn())
-      this.router.navigateByUrl('/userPage');
+      this.router.navigateByUrl('/dashboard');
   }
 
 
@@ -30,7 +31,7 @@ export class LoginPageComponent implements OnInit {
     this.userService.login(form.value).subscribe(
       res => {
         this.userService.setToken(res['token']);
-        this.router.navigateByUrl('/userPage');
+        this.router.navigateByUrl('/dashboard');
       },
       err => {
          this.serverErrorMessages = err.error.message;

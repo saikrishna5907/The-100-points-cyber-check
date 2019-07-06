@@ -27,6 +27,6 @@ mat-toolbar a{
 mat-sidenav-container{
 }
 mat-sidenav{
-  background-color: rgb(255, 123, 0);
+  background-color: #f96332;
 }
-.material-icons{ color: rgb(110, 211, 80); }
+.material-icons{ color:rgb(13, 44, 46) }

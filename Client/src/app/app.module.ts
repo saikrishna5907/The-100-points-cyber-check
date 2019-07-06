@@ -13,7 +13,6 @@ import {routes} from './app-routing.module';
 // angular material imports
 import { MatInputModule, MatMenuModule, MatIconModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatRadioModule, MatProgressBarModule, MatTableModule } from '@angular/material';
 import {MatSelectModule, MatTabsModule, MatSliderModule, MatToolbarModule,MatStepperModule, MatSidenavModule, MatListModule } from '@angular/material';
-import { UserPageComponent } from './user-page/user-page.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserService } from './shared/user.service';
 import {AuthInterceptor} from './auth/auth.interceptor';
@@ -24,16 +23,19 @@ import { SurveyComponent } from './survey/survey.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuestionService } from './shared/question.service';
 import {AnswersService} from './shared/answers.service';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { MainpageheaderComponent } from './mainpageheader/mainpageheader.component';
+import { ChartsDataService } from './shared/charts-data.service';
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     LoginPageComponent,
-    UserPageComponent,
     SignUpComponent,
     UserSideNavComponent,
     SurveyComponent,
     DashboardComponent,
+    MainpageheaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,8 @@ import {AnswersService} from './shared/answers.service';
     MatSidenavModule,
     MatListModule,
     MatProgressBarModule,
-    LayoutModule
+    LayoutModule,
+    CarouselModule
   ],
   providers: [
     AuthGuard,
@@ -70,7 +73,8 @@ import {AnswersService} from './shared/answers.service';
     },
      UserService,
      QuestionService,
-     AnswersService
+     AnswersService,
+     ChartsDataService
     ],
   bootstrap: [AppComponent]
 })
