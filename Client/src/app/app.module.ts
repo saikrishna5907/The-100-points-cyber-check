@@ -26,6 +26,7 @@ import {AnswersService} from './shared/answers.service';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MainpageheaderComponent } from './mainpageheader/mainpageheader.component';
 import { ChartsDataService } from './shared/charts-data.service';
+import { AnswersOfUserService } from './shared/answers-of-user.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +75,8 @@ import { ChartsDataService } from './shared/charts-data.service';
      UserService,
      QuestionService,
      AnswersService,
-     ChartsDataService
+     ChartsDataService,
+     AnswersOfUserService
     ],
   bootstrap: [AppComponent]
 })

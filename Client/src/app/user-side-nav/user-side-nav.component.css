@@ -18,6 +18,9 @@
 .spacer{
   flex: 1 1 auto;
 }
+.toolbar_header{
+  background-color: rgba(24, 40, 255, 0.767);
+}
 mat-toolbar a{
   display: inline-block;
   margin: 0 10px;

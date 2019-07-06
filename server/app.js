@@ -8,7 +8,6 @@ const cors = require('cors');
 const passport = require('passport');
 
 const rtsIndex = require('./routes/index.router');
-var questionController = require('./Controllers/question.controller'); 
 var app = express();
 
 //middleware
