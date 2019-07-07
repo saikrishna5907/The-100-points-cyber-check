@@ -1,5 +1,7 @@
 .dash_result_graph{
 text-align:center; 
-background-color:  rgba(91, 95, 160, 0.5);
+background-image: linear-gradient(150deg, #583b6986 0%, #cf765b83 51%,   #263236 75%);
 align-content: center;
+height: 350px;
 }
+/* 263236 */
